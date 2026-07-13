@@ -123,7 +123,12 @@
     "coupleIntro": "A few moments we've tucked between the pages.",
     "guestsIntro": "Now it's your turn — add the moments you captured.",
     "upload": "Add your photos",
-    "uploadThanks": "Received! Your photos will appear once we've had a peek."
+    "uploadThanks": "Received! Your photos will appear once we've had a peek.",
+    "comingSoonPhotos": "We're tucking the photographs in — check back soon.",
+    "uploadName": "Your name",
+    "uploading": "Uploading {done} of {total}…",
+    "uploadError": "Some photos didn't make it — try those again.",
+    "invalidToken": "This upload link isn't valid. Ask the couple for a fresh one."
   },
   "quiz": {
     "title": "How Well Do You Know Us?",
