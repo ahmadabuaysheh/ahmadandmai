@@ -14,7 +14,7 @@ Scope: plan.md milestone 7 — couple-mode photo wall live now; guest-upload pip
   - `addPhoto(entry: NewPhoto): Promise<void>` — `NewPhoto = { uploaderName: string | null; storagePath: string }`, inserted with `approved = false`.
 - **Storage module** `src/lib/storage.ts` (server-only usage):
   - `getViewUrls(paths: string[]): Promise<Map<string, string>>` — Supabase: batch `createSignedUrls` (1 h expiry); local/env-less: identity mapping (path used as URL) so dev still renders seeded rows.
-  - `createUploadUrl(path: string): Promise<{ path: string; token: string } | null>` — Supabase `createSignedUploadUrl`; local: returns null (upload disabled in env-less dev).
+  - `createUploadUrl(path: string): Promise<{ path: string; signedUrl: string } | null>` — Supabase `createSignedUploadUrl`; the client PUTs file bytes to `signedUrl` directly. Local/env-less: returns null (upload disabled in dev without Supabase).
 
 ## 2. Couple mode (default)
 
