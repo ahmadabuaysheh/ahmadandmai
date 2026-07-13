@@ -2,7 +2,10 @@
   "common": {
     "coupleNames": "Ahmad & Mai",
     "initials": "A & M",
-    "monogram": ["A", "M"],
+    "monogram": [
+      "A",
+      "M"
+    ],
     "languageToggle": "عربي",
     "loading": "Unfolding...",
     "nav": "Contents of the letter",
@@ -55,10 +58,22 @@
     "whenLabel": "When",
     "venueHidden": "Somewhere beautiful — we'll whisper the address soon.",
     "schedule": [
-      { "time": "[TIME]", "event": "Guests arrive" },
-      { "time": "[TIME]", "event": "The ceremony" },
-      { "time": "[TIME]", "event": "Dinner is served" },
-      { "time": "[TIME]", "event": "Dancing until the ink runs dry" }
+      {
+        "time": "[TIME]",
+        "event": "Guests arrive"
+      },
+      {
+        "time": "[TIME]",
+        "event": "The ceremony"
+      },
+      {
+        "time": "[TIME]",
+        "event": "Dinner is served"
+      },
+      {
+        "time": "[TIME]",
+        "event": "Dancing until the ink runs dry"
+      }
     ],
     "mapTitle": "Finding your way",
     "hotelsTitle": "Where to stay",
@@ -74,13 +89,24 @@
     "aNo": "Sadly, I can't make it",
     "qParty": "How many of you will be joining us?",
     "qMeal": "What shall we feed you?",
-    "mealOptions": ["[Meal option 1]", "[Meal option 2]", "[Vegetarian option]"],
+    "mealOptions": [
+      "[Meal option 1]",
+      "[Meal option 2]",
+      "[Vegetarian option]"
+    ],
     "qSong": "What song will get you on the dance floor?",
     "songPlaceholder": "Name that tune...",
     "qMessage": "Any words for the two of us?",
     "messagePlaceholder": "Write us a little letter of your own...",
     "thanksYes": "Your reply is sealed and on its way to our hearts. See you there!",
-    "thanksNo": "We'll miss you dearly — but you'll be with us in spirit. Thank you for writing back."
+    "thanksNo": "We'll miss you dearly — but you'll be with us in spirit. Thank you for writing back.",
+    "editReply": "Change our reply",
+    "repliedSummary": "Your reply is sealed:",
+    "guestN": "Guest {n}",
+    "partyOf": "Party of {n}",
+    "notComing": "Regretfully declined",
+    "skip": "Skip this one",
+    "errorGeneric": "The ink smudged — please try sending again."
   },
   "guestbook": {
     "title": "Notes Pinned to Our Letter",
@@ -103,22 +129,85 @@
     "leaderboard": "The Inner Circle",
     "yourScore": "You scored {score} of {total}",
     "questions": [
-      { "q": "[EDIT ME] Where did we first meet?", "options": ["[A]", "[B]", "[C]"], "answer": 0 },
-      { "q": "[EDIT ME] Who said 'I love you' first?", "options": ["Ahmad", "Mai", "Both at once"], "answer": 0 },
-      { "q": "[EDIT ME] What's our go-to late-night food?", "options": ["[A]", "[B]", "[C]"], "answer": 0 },
-      { "q": "[EDIT ME] Where was the proposal?", "options": ["[A]", "[B]", "[C]"], "answer": 0 },
-      { "q": "[EDIT ME] Who's the better cook?", "options": ["Ahmad", "Mai", "Neither, bless them"], "answer": 0 },
-      { "q": "[EDIT ME] What's our song?", "options": ["[A]", "[B]", "[C]"], "answer": 0 }
+      {
+        "q": "[EDIT ME] Where did we first meet?",
+        "options": [
+          "[A]",
+          "[B]",
+          "[C]"
+        ],
+        "answer": 0
+      },
+      {
+        "q": "[EDIT ME] Who said 'I love you' first?",
+        "options": [
+          "Ahmad",
+          "Mai",
+          "Both at once"
+        ],
+        "answer": 0
+      },
+      {
+        "q": "[EDIT ME] What's our go-to late-night food?",
+        "options": [
+          "[A]",
+          "[B]",
+          "[C]"
+        ],
+        "answer": 0
+      },
+      {
+        "q": "[EDIT ME] Where was the proposal?",
+        "options": [
+          "[A]",
+          "[B]",
+          "[C]"
+        ],
+        "answer": 0
+      },
+      {
+        "q": "[EDIT ME] Who's the better cook?",
+        "options": [
+          "Ahmad",
+          "Mai",
+          "Neither, bless them"
+        ],
+        "answer": 0
+      },
+      {
+        "q": "[EDIT ME] What's our song?",
+        "options": [
+          "[A]",
+          "[B]",
+          "[C]"
+        ],
+        "answer": 0
+      }
     ]
   },
   "faq": {
     "title": "P.S. — The Practical Bits",
     "items": [
-      { "q": "What should I wear?", "a": "[EDIT ME] Formal attire. Think elegant — you'll want to look good in the photos, because there will be many." },
-      { "q": "Can I bring the little ones?", "a": "[EDIT ME] We love your kids, and this note will tell you whether it's a grown-ups' evening or a family affair." },
-      { "q": "Where do I park?", "a": "[EDIT ME] Parking details will appear here once the venue is revealed." },
-      { "q": "Can I take photos during the ceremony?", "a": "[EDIT ME] We'd love your eyes, not your screens, during the ceremony — our photographer has it covered. Afterward, snap away." },
-      { "q": "What about gifts?", "a": "Your presence is the truest gift. If you insist, our registry is just below." }
+      {
+        "q": "What should I wear?",
+        "a": "[EDIT ME] Formal attire. Think elegant — you'll want to look good in the photos, because there will be many."
+      },
+      {
+        "q": "Can I bring the little ones?",
+        "a": "[EDIT ME] We love your kids, and this note will tell you whether it's a grown-ups' evening or a family affair."
+      },
+      {
+        "q": "Where do I park?",
+        "a": "[EDIT ME] Parking details will appear here once the venue is revealed."
+      },
+      {
+        "q": "Can I take photos during the ceremony?",
+        "a": "[EDIT ME] We'd love your eyes, not your screens, during the ceremony — our photographer has it covered. Afterward, snap away."
+      },
+      {
+        "q": "What about gifts?",
+        "a": "Your presence is the truest gift. If you insist, our registry is just below."
+      }
     ],
     "registryTitle": "The Registry",
     "registryIntro": "[EDIT ME] Truly — you being there is everything. For those who insist:"

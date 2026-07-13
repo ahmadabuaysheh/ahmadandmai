@@ -8,6 +8,7 @@ import Hero from '@/components/letter/Hero';
 import LetterSection from '@/components/letter/LetterSection';
 import Story from '@/components/letter/Story';
 import RibbonNav from '@/components/letter/RibbonNav';
+import Rsvp from '@/components/letter/Rsvp';
 import Signature from '@/components/letter/Signature';
 
 export default async function LetterPage({
@@ -39,7 +40,7 @@ export default async function LetterPage({
     { id: 'quiz', label: t('quiz.title') },
     { id: 'faq', label: t('faq.title') },
   ];
-  const stubs = sections.slice(2);
+  const stubs = sections.slice(3);
 
   return (
     <EnvelopeGate tier={guest.tier}>
@@ -48,6 +49,7 @@ export default async function LetterPage({
         <Hero gated={gated} />
         <Story />
         <Details gated={gated} />
+        <Rsvp guest={guest} />
         {stubs.map((s) => (
           <LetterSection key={s.id} id={s.id} title={s.label}>
             <p className="italic text-ink-faded">{t('common.comingSoon')}</p>
