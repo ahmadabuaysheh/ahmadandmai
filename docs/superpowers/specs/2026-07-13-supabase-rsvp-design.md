@@ -40,7 +40,7 @@ Client component `RsvpFlow` rendered inside the existing `LetterSection id="rsvp
 - **song/message:** free text, optional, single input each.
 - **done:** `thanksYes` / `thanksNo` copy.
 - **Already replied:** section shows a compact summary of the saved reply + "change our reply" button that re-enters the flow pre-filled.
-- Chat-like presentation: previous answers remain visible as small "sent" lines; one active question at a time; framer-motion slide/fade transitions, instant under reduced motion; mobile-first.
+- Chat-like presentation: one active question at a time with framer-motion slide/fade transitions (instant under reduced motion); a back link on every step after the first; the saved reply renders as a compact summary. Mobile-first.
 - New locale keys (EN + AR): `rsvp.editReply`, `rsvp.repliedSummary`, `rsvp.guestN`, `rsvp.partyOf`, `rsvp.skip`, `rsvp.errorGeneric`. No hardcoded strings.
 
 ## 4. Server action & validation
