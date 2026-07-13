@@ -44,6 +44,12 @@ Guests reply through a conversational flow in the letter: attending → party si
 - Production (Vercel) has `NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, and `INVITE_SECRET` set in the project env. Dev and prod currently share the same Supabase project.
 - Deploys: push to `main` → Vercel auto-deploys.
 
+## Admin panel
+
+- **URL:** https://ahmadandmai.vercel.app/admin — protected by a shared passphrase (`ADMIN_SECRET` env var in Vercel and `.env.local`; never in git). Login lasts 30 days per browser.
+- **Sections:** RSVPs (attendance + meal stats, full table, `rsvps.csv` and `songs.txt` exports), Guestbook moderation (approve/hide), Photo moderation (approve/hide — replaces the Table Editor workaround), Settings (wedding date/time GMT+3, venue, gallery mode), Invites (create/edit codes for real guests).
+- Everything the dashboard did manually now lives here; the Supabase dashboard remains the fallback.
+
 ## Project docs
 
 - Product brief: `PLAN.md`
