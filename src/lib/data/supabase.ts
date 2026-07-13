@@ -4,8 +4,10 @@ import type {
   GuestbookNote,
   Invite,
   NewGuestbookNote,
+  NewPhoto,
   NewQuizScore,
   NewRsvp,
+  Photo,
   QuizScore,
   RsvpRow,
   Settings,
@@ -137,6 +139,29 @@ export function createSupabaseStore(): DataStore {
         score: entry.score,
       });
       if (error) throw new Error(`addQuizScore failed: ${error.message}`);
+    },
+
+    async getPhotos(): Promise<Photo[]> {
+      const { data, error } = await client
+        .from('photos')
+        .select('id, uploader_name, storage_path, created_at')
+        .eq('approved', true)
+        .order('created_at', { ascending: true });
+      if (error || !data) return [];
+      return data.map((p) => ({
+        id: p.id,
+        uploaderName: p.uploader_name,
+        storagePath: p.storage_path,
+        createdAt: p.created_at,
+      }));
+    },
+
+    async addPhoto(entry: NewPhoto): Promise<void> {
+      const { error } = await client.from('photos').insert({
+        uploader_name: entry.uploaderName,
+        storage_path: entry.storagePath,
+      });
+      if (error) throw new Error(`addPhoto failed: ${error.message}`);
     },
   };
 }

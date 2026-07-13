@@ -1,4 +1,5 @@
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { randomUUID } from 'node:crypto';
 import path from 'node:path';
 import seed from './seed.json';
 import type {
@@ -6,8 +7,10 @@ import type {
   GuestbookNote,
   Invite,
   NewGuestbookNote,
+  NewPhoto,
   NewQuizScore,
   NewRsvp,
+  Photo,
   QuizScore,
   RsvpRow,
   Settings,
@@ -17,11 +20,19 @@ interface LocalDb {
   rsvps: RsvpRow[];
   guestbook: (NewGuestbookNote & { approved: boolean; createdAt: string })[];
   quizScores: (NewQuizScore & { createdAt: string })[];
+  photos: (NewPhoto & { id: string; approved: boolean; createdAt: string })[];
 }
 
-const EMPTY_DB: LocalDb = { rsvps: [], guestbook: [], quizScores: [] };
+const EMPTY_DB: LocalDb = {
+  rsvps: [],
+  guestbook: [],
+  quizScores: [],
+  photos: [],
+};
 
-export function createLocalStore(opts?: { dbPath?: string }): DataStore {
+export function createLocalStore(opts?: { dbPath?: string }): DataStore & {
+  __approveAllPhotos(): Promise<void>;
+} {
   const dbPath = opts?.dbPath ?? path.join(process.cwd(), '.local-db.json');
 
   const readDb = (): LocalDb => {
@@ -86,6 +97,36 @@ export function createLocalStore(opts?: { dbPath?: string }): DataStore {
     async addQuizScore(entry: NewQuizScore): Promise<void> {
       const db = readDb();
       db.quizScores.push({ ...entry, createdAt: new Date().toISOString() });
+      writeFileSync(dbPath, JSON.stringify(db, null, 2));
+    },
+
+    async getPhotos(): Promise<Photo[]> {
+      // Insertion order is chronological (oldest first) already.
+      return readDb()
+        .photos.filter((p) => p.approved)
+        .map(({ id, uploaderName, storagePath, createdAt }) => ({
+          id,
+          uploaderName,
+          storagePath,
+          createdAt,
+        }));
+    },
+
+    async addPhoto(entry: NewPhoto): Promise<void> {
+      const db = readDb();
+      db.photos.push({
+        ...entry,
+        id: randomUUID(),
+        approved: false,
+        createdAt: new Date().toISOString(),
+      });
+      writeFileSync(dbPath, JSON.stringify(db, null, 2));
+    },
+
+    // Test-only helper mirroring dashboard approval.
+    async __approveAllPhotos(): Promise<void> {
+      const db = readDb();
+      db.photos = db.photos.map((p) => ({ ...p, approved: true }));
       writeFileSync(dbPath, JSON.stringify(db, null, 2));
     },
   };

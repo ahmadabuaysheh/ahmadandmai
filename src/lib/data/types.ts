@@ -56,6 +56,18 @@ export interface NewQuizScore {
   score: number;
 }
 
+export interface Photo {
+  id: string;
+  uploaderName: string | null;
+  storagePath: string;
+  createdAt: string;
+}
+
+export interface NewPhoto {
+  uploaderName: string | null;
+  storagePath: string;
+}
+
 export interface DataStore {
   getInvite(code: string): Promise<Invite | null>;
   getSettings(): Promise<Settings>;
@@ -65,4 +77,6 @@ export interface DataStore {
   addGuestbookNote(entry: NewGuestbookNote): Promise<void>;
   getQuizScores(): Promise<QuizScore[]>;
   addQuizScore(entry: NewQuizScore): Promise<void>;
+  getPhotos(): Promise<Photo[]>;
+  addPhoto(entry: NewPhoto): Promise<void>;
 }

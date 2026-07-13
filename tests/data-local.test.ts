@@ -123,4 +123,23 @@ describe('local data store', () => {
       { name: 'Omar', score: 5, createdAt: expect.any(String) },
     ]);
   });
+
+  it('photos: addPhoto lands unapproved and getPhotos hides it', async () => {
+    await store.addPhoto({ uploaderName: 'Sara', storagePath: 'uploads/a.jpg' });
+    expect(await store.getPhotos()).toEqual([]);
+  });
+
+  it('photos: getPhotos returns approved photos oldest first', async () => {
+    await store.addPhoto({ uploaderName: 'Sara', storagePath: 'uploads/a.jpg' });
+    await store.addPhoto({ uploaderName: null, storagePath: 'uploads/b.jpg' });
+    await store.__approveAllPhotos();
+    const photos = await store.getPhotos();
+    expect(photos.map((p) => p.storagePath)).toEqual([
+      'uploads/a.jpg',
+      'uploads/b.jpg',
+    ]);
+    expect(photos[0].uploaderName).toBe('Sara');
+    expect(photos[0].id).toBeTruthy();
+    expect(photos[0].createdAt).toBeTruthy();
+  });
 });
