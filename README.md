@@ -24,6 +24,11 @@ Tier-gated content is filtered **server-side** — it never reaches the HTML of 
 
 Guests reply through a conversational flow in the letter: attending → party size (capped by their invite) → per-guest meal → song request → message. Replies are stored one row per guest in the `rsvps` table; re-submitting **replaces** the previous reply. Submissions are validated server-side against the signed invite cookie.
 
+## Guestbook & Quiz
+
+- **Guestbook:** approved notes render as a pinned board (newest first, capped at 100); guests sign with a name from their invite. Notes appear immediately (`approved` default true) — the future admin panel can hide any.
+- **Quiz:** questions live in `src/messages/{en,ar}.json` under `quiz.questions` (`answer` is the index of the correct option). Leaderboard shows the top 10 — best score per guest name, earliest attempt wins ties. Retakes allowed.
+
 ## Data backend
 
 `src/lib/data/index.ts` picks the backend automatically: **Supabase** when `NEXT_PUBLIC_SUPABASE_URL` is set in `.env.local`, otherwise a **local JSON** store (seed data in `src/lib/data/seed.json`, writes to gitignored `.local-db.json`).
