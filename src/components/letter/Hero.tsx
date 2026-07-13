@@ -1,6 +1,7 @@
 import { getFormatter, getTranslations } from 'next-intl/server';
 import type { GatedContent } from '@/lib/gating';
 import Countdown from './Countdown';
+import WalkingCountdown from './WalkingCountdown';
 
 export default async function Hero({ gated }: { gated: GatedContent }) {
   const t = await getTranslations('hero');
@@ -23,10 +24,13 @@ export default async function Hero({ gated }: { gated: GatedContent }) {
           : t('dateHidden')}
       </p>
       {gated.weddingDateIso && (
-        <Countdown
-          targetIso={gated.weddingDateIso}
-          label={t('countdownLabel')}
-        />
+        <>
+          <WalkingCountdown targetIso={gated.weddingDateIso} />
+          <Countdown
+            targetIso={gated.weddingDateIso}
+            label={t('countdownLabel')}
+          />
+        </>
       )}
     </header>
   );
