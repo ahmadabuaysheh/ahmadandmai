@@ -1,5 +1,6 @@
 import { getTranslations } from 'next-intl/server';
 import LetterSection from './LetterSection';
+import MarginNote from './MarginNote';
 import PolaroidFigure from './PolaroidFigure';
 
 interface Chapter {
@@ -16,6 +17,7 @@ export default async function Story() {
       <p className="italic text-ink-faded">{t('intro')}</p>
       {chapters.map((chapter, i) => (
         <div key={chapter.title} className="mt-8">
+          {i === 1 && <MarginNote>{t('marginNote')}</MarginNote>}
           <h3 className="text-xl">{chapter.title}</h3>
           <p className="mt-2 leading-relaxed">{chapter.body}</p>
           {i < 3 && (

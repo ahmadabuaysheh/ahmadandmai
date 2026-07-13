@@ -1,11 +1,12 @@
 'use client';
 
-import { useState, useSyncExternalStore } from 'react';
+import { useEffect, useState, useSyncExternalStore } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import WaxSeal from './WaxSeal';
 import InviteCodeForm from './InviteCodeForm';
 import type { Tier } from '@/lib/data/types';
+import { playSealCrack, setSoundEnabled, soundEnabled } from '@/lib/sound';
 
 // The "seal broken" flag lives in sessionStorage so the envelope doesn't
 // replay on every soft navigation, exposed as a tiny external store so the
@@ -29,6 +30,13 @@ function markSealBroken() {
   listeners.forEach((l) => l());
 }
 
+function markSealed() {
+  sessionStorage.removeItem(SEAL_KEY);
+  listeners.forEach((l) => l());
+}
+
+const IDLE_MS = 10 * 60 * 1000;
+
 export default function EnvelopeGate({
   tier,
   children,
@@ -42,9 +50,35 @@ export default function EnvelopeGate({
   const reduced = useReducedMotion();
   const isGuest = tier !== 'public';
   const [broken, setBroken] = useState(false);
+  const [sound, setSound] = useState(false);
   const opened = useSyncExternalStore(subscribe, isSealBroken, () => false);
 
+  useEffect(() => {
+    setSound(soundEnabled());
+  }, []);
+
+  // The letter gently re-seals after a long idle; reopening is one tap.
+  useEffect(() => {
+    if (!opened || !isGuest) return;
+    let timer = window.setTimeout(markSealed, IDLE_MS);
+    const reset = () => {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(markSealed, IDLE_MS);
+    };
+    const events = ['pointerdown', 'keydown', 'scroll', 'touchstart'] as const;
+    events.forEach((e) => window.addEventListener(e, reset, { passive: true }));
+    return () => {
+      window.clearTimeout(timer);
+      events.forEach((e) => window.removeEventListener(e, reset));
+    };
+  }, [opened, isGuest]);
+
+  useEffect(() => {
+    if (!opened) setBroken(false);
+  }, [opened]);
+
   const open = () => {
+    if (sound) playSealCrack();
     setBroken(true);
     setTimeout(markSealBroken, reduced ? 0 : 700);
   };
@@ -68,6 +102,16 @@ export default function EnvelopeGate({
                 onBreak={open}
                 label={t('openPrompt')}
               />
+              <button
+                type="button"
+                onClick={() => {
+                  setSound(!sound);
+                  setSoundEnabled(!sound);
+                }}
+                className="text-xs text-ink-faded underline"
+              >
+                {sound ? t('soundOff') : t('soundOn')}
+              </button>
             </>
           ) : (
             <>

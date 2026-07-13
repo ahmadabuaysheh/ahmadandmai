@@ -20,7 +20,9 @@
     "codePlaceholder": "Enter your invitation code",
     "codeInvalid": "Hmm, we don't recognize that code. Check your invitation and try again.",
     "openPrompt": "Tap the seal to open",
-    "publicTeaser": "Something beautiful is being written. If you hold an invitation, break the seal."
+    "publicTeaser": "Something beautiful is being written. If you hold an invitation, break the seal.",
+    "soundOn": "Sound on",
+    "soundOff": "Sound off"
   },
   "hero": {
     "greeting": "Dearest friend,",
@@ -50,7 +52,8 @@
         "title": "The Next Chapter",
         "body": "And now we're writing the best part — and we want you in it."
       }
-    ]
+    ],
+    "marginNote": "[EDIT ME] a tiny inside joke goes here"
   },
   "details": {
     "title": "The Details",
@@ -215,11 +218,13 @@
       }
     ],
     "registryTitle": "The Registry",
-    "registryIntro": "[EDIT ME] Truly — you being there is everything. For those who insist:"
+    "registryIntro": "[EDIT ME] Truly — you being there is everything. For those who insist:",
+    "marginNote": "[EDIT ME] another little secret"
   },
   "signature": {
     "closing": "With all the love ink can hold,",
     "names": "Ahmad & Mai",
-    "postscript": "P.S. You found the end of the letter. But did you find everything hidden inside it?"
+    "postscript": "P.S. You found the end of the letter. But did you find everything hidden inside it?",
+    "blooperCaption": "[EDIT ME] the photo we swore no one would see"
   }
 }

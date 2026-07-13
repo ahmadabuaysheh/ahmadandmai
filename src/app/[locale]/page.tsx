@@ -4,10 +4,10 @@ import { getDataStore } from '@/lib/data';
 import { gateForTier } from '@/lib/gating';
 import EnvelopeGate from '@/components/envelope/EnvelopeGate';
 import Details from '@/components/letter/Details';
+import Faq from '@/components/letter/Faq';
 import Gallery from '@/components/letter/Gallery';
 import Guestbook from '@/components/letter/Guestbook';
 import Hero from '@/components/letter/Hero';
-import LetterSection from '@/components/letter/LetterSection';
 import Quiz from '@/components/letter/Quiz';
 import RibbonNav from '@/components/letter/RibbonNav';
 import Rsvp from '@/components/letter/Rsvp';
@@ -55,9 +55,7 @@ export default async function LetterPage({
         <Guestbook guest={guest} />
         <Gallery guest={guest} settings={settings} />
         <Quiz guest={guest} />
-        <LetterSection id="faq" title={t('faq.title')}>
-          <p className="italic text-ink-faded">{t('common.comingSoon')}</p>
-        </LetterSection>
+        <Faq />
         <Signature />
       </main>
     </EnvelopeGate>

@@ -122,3 +122,48 @@ html[lang='ar'] .script {
     animation: none;
   }
 }
+
+/* Easter-egg hearts */
+.heart-fly,
+.heart-still {
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  color: var(--wax);
+  font-size: 14px;
+  pointer-events: none;
+}
+
+.heart-fly {
+  animation: heart-fly 1.6s ease-out forwards;
+}
+
+.heart-still {
+  animation: heart-fade 1.4s ease-out forwards;
+}
+
+@keyframes heart-fly {
+  0% {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy)));
+    opacity: 0;
+  }
+}
+
+@keyframes heart-fade {
+  0% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heart-fly {
+    animation: heart-fade 1.4s ease-out forwards;
+  }
+}
