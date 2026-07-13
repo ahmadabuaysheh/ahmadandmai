@@ -44,6 +44,15 @@ Guests reply through a conversational flow in the letter: attending → party si
 - Production (Vercel) has `NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, and `INVITE_SECRET` set in the project env. Dev and prod currently share the same Supabase project.
 - Deploys: push to `main` → Vercel auto-deploys.
 
+## Finishing touches
+
+- **Walking countdown:** two ink figures walk toward each other from site launch (2026-07-13) until the wedding day, meeting under a heart. Position derives from real time.
+- **Easter egg:** tap the signature wax seal 5× (or Konami code on desktop) → heart confetti + a blooper polaroid. Swap `public/polaroids/blooper.svg` for the real photo; caption is `signature.blooperCaption` in the locale files.
+- **Margin notes:** tiny script asides in Story and FAQ (`story.marginNote`, `faq.marginNote` — fill in your inside jokes).
+- **Seal sound:** synthesized paper-crack on seal break, off by default, toggle on the envelope.
+- **Idle re-seal:** the letter reseals after 10 idle minutes; one tap reopens.
+- Every animation respects `prefers-reduced-motion`; Arabic headings use Amiri-tuned line-height.
+
 ## Admin panel
 
 - **URL:** https://ahmadandmai.vercel.app/admin — protected by a shared passphrase (`ADMIN_SECRET` env var in Vercel and `.env.local`; never in git). Login lasts 30 days per browser.
