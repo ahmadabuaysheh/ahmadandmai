@@ -4,7 +4,7 @@ import type { Invite } from '@/lib/data';
 
 const invite: Invite = {
   code: 'ROSE42',
-  guestNames: ['Layla', 'Omar'],
+  guestNames: ['Suzan', 'Omar'],
   tier: 'full',
   maxPartySize: 3,
   languagePref: null,
@@ -27,7 +27,7 @@ describe('validateRsvp', () => {
     expect(res.rows).toHaveLength(2);
     expect(res.rows[0]).toEqual({
       inviteCode: 'ROSE42',
-      guestName: 'Layla',
+      guestName: 'Suzan',
       attending: true,
       meal: 'Chicken',
       songRequest: 'Our Song',
@@ -91,7 +91,7 @@ describe('validateRsvp', () => {
     expect(res.rows).toEqual([
       {
         inviteCode: 'ROSE42',
-        guestName: 'Layla',
+        guestName: 'Suzan',
         attending: false,
         meal: null,
         songRequest: null,

@@ -373,7 +373,7 @@ git commit -m "feat: EN/AR i18n routing with RTL, fonts, language toggle, noinde
   - `interface DataStore { getInvite(code: string): Promise<Invite | null>; getSettings(): Promise<Settings>; saveRsvp(rsvp: NewRsvp): Promise<void> }`
   - `createLocalStore(opts?: { dbPath?: string }): DataStore` from `local.ts`.
   - `getDataStore(): DataStore` from `index.ts` (Supabase if `NEXT_PUBLIC_SUPABASE_URL` set, else local).
-  - Seed invite codes: `ROSE42` (full, ["Layla", "Omar"], party 2, pref null) and `MOON17` (save_the_date, ["Sara"], party 1, pref 'ar').
+  - Seed invite codes: `ROSE42` (full, ["Suzan", "Omar"], party 2, pref null) and `MOON17` (save_the_date, ["Sara"], party 1, pref 'ar').
 
 - [ ] **Step 1: Vitest config + script**
 
@@ -419,7 +419,7 @@ describe('local data store', () => {
     const invite = await store.getInvite('  rose42 ');
     expect(invite).not.toBeNull();
     expect(invite!.tier).toBe('full');
-    expect(invite!.guestNames).toEqual(['Layla', 'Omar']);
+    expect(invite!.guestNames).toEqual(['Suzan', 'Omar']);
     expect(invite!.maxPartySize).toBe(2);
   });
 
@@ -437,7 +437,7 @@ describe('local data store', () => {
   it('persists RSVPs to the db file', async () => {
     await store.saveRsvp({
       inviteCode: 'ROSE42',
-      guestName: 'Layla',
+      guestName: 'Suzan',
       attending: true,
       meal: null,
       songRequest: 'Our song',
@@ -513,7 +513,7 @@ export interface DataStore {
   "invites": [
     {
       "code": "ROSE42",
-      "guestNames": ["Layla", "Omar"],
+      "guestNames": ["Suzan", "Omar"],
       "tier": "full",
       "maxPartySize": 2,
       "languagePref": null

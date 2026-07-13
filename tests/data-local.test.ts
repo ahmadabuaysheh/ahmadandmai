@@ -16,7 +16,7 @@ describe('local data store', () => {
     const invite = await store.getInvite('  rose42 ');
     expect(invite).not.toBeNull();
     expect(invite!.tier).toBe('full');
-    expect(invite!.guestNames).toEqual(['Layla', 'Omar']);
+    expect(invite!.guestNames).toEqual(['Suzan', 'Omar']);
     expect(invite!.maxPartySize).toBe(2);
   });
 
@@ -35,7 +35,7 @@ describe('local data store', () => {
     await store.replaceRsvps('ROSE42', [
       {
         inviteCode: 'ROSE42',
-        guestName: 'Layla',
+        guestName: 'Suzan',
         attending: true,
         meal: 'A',
         songRequest: 'Song 1',
@@ -56,7 +56,7 @@ describe('local data store', () => {
     await store.replaceRsvps('ROSE42', [
       {
         inviteCode: 'ROSE42',
-        guestName: 'Layla',
+        guestName: 'Suzan',
         attending: false,
         meal: null,
         songRequest: null,
@@ -73,7 +73,7 @@ describe('local data store', () => {
     await store.replaceRsvps('ROSE42', [
       {
         inviteCode: 'ROSE42',
-        guestName: 'Layla',
+        guestName: 'Suzan',
         attending: true,
         meal: null,
         songRequest: null,

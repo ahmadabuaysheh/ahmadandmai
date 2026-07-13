@@ -1,7 +1,7 @@
 -- Seed data matching src/lib/data/seed.json. Idempotent: re-running updates.
 insert into invites (code, guest_names, tier, max_party_size, language_pref)
 values
-  ('ROSE42', array['Layla', 'Omar'], 'full', 2, null),
+  ('ROSE42', array['Suzan', 'Omar'], 'full', 2, null),
   ('MOON17', array['Sara'], 'save_the_date', 1, 'ar')
 on conflict (code) do update set
   guest_names = excluded.guest_names,

@@ -37,7 +37,7 @@
 -- Seed data matching src/lib/data/seed.json. Idempotent: re-running updates.
 insert into invites (code, guest_names, tier, max_party_size, language_pref)
 values
-  ('ROSE42', array['Layla', 'Omar'], 'full', 2, null),
+  ('ROSE42', array['Suzan', 'Omar'], 'full', 2, null),
   ('MOON17', array['Sara'], 'save_the_date', 1, 'ar')
 on conflict (code) do update set
   guest_names = excluded.guest_names,
@@ -92,7 +92,7 @@ Replace the `persists RSVPs to the db file` test with:
     await store.replaceRsvps('ROSE42', [
       {
         inviteCode: 'ROSE42',
-        guestName: 'Layla',
+        guestName: 'Suzan',
         attending: true,
         meal: 'A',
         songRequest: 'Song 1',
@@ -113,7 +113,7 @@ Replace the `persists RSVPs to the db file` test with:
     await store.replaceRsvps('ROSE42', [
       {
         inviteCode: 'ROSE42',
-        guestName: 'Layla',
+        guestName: 'Suzan',
         attending: false,
         meal: null,
         songRequest: null,
@@ -128,7 +128,7 @@ Replace the `persists RSVPs to the db file` test with:
 
   it('replaceRsvps leaves other invites untouched', async () => {
     await store.replaceRsvps('ROSE42', [
-      { inviteCode: 'ROSE42', guestName: 'Layla', attending: true, meal: null, songRequest: null, message: null },
+      { inviteCode: 'ROSE42', guestName: 'Suzan', attending: true, meal: null, songRequest: null, message: null },
     ]);
     await store.replaceRsvps('MOON17', [
       { inviteCode: 'MOON17', guestName: 'Sara', attending: true, meal: null, songRequest: null, message: null },
@@ -272,7 +272,7 @@ import type { Invite } from '@/lib/data';
 
 const invite: Invite = {
   code: 'ROSE42',
-  guestNames: ['Layla', 'Omar'],
+  guestNames: ['Suzan', 'Omar'],
   tier: 'full',
   maxPartySize: 3,
   languagePref: null,
@@ -295,7 +295,7 @@ describe('validateRsvp', () => {
     expect(res.rows).toHaveLength(2);
     expect(res.rows[0]).toEqual({
       inviteCode: 'ROSE42',
-      guestName: 'Layla',
+      guestName: 'Suzan',
       attending: true,
       meal: 'Chicken',
       songRequest: 'Our Song',
@@ -340,7 +340,7 @@ describe('validateRsvp', () => {
     expect(res.rows).toEqual([
       {
         inviteCode: 'ROSE42',
-        guestName: 'Layla',
+        guestName: 'Suzan',
         attending: false,
         meal: null,
         songRequest: null,
@@ -881,7 +881,7 @@ In `src/app/[locale]/page.tsx`: import `Rsvp` from `@/components/letter/Rsvp`; c
 
 - [ ] **Step 5: Verify locally (dev server, both locales)**
 
-- `ROSE42`: attending → party 2 → meals per Layla/Omar → song → message → send → thank-you; reload → sealed summary with both guests; "Change our reply" → decline → reload → "Regretfully declined".
+- `ROSE42`: attending → party 2 → meals per Suzan/Omar → song → message → send → thank-you; reload → sealed summary with both guests; "Change our reply" → decline → reload → "Regretfully declined".
 - `MOON17` (`/ar`): party question skipped (max 1), full flow in Arabic, RTL.
 - Check the Supabase dashboard `rsvps` table shows the rows replacing, not appending.
 

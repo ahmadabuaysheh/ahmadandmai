@@ -2,7 +2,7 @@
   "invites": [
     {
       "code": "ROSE42",
-      "guestNames": ["Layla", "Omar"],
+      "guestNames": ["Suzan", "Omar"],
       "tier": "full",
       "maxPartySize": 2,
       "languagePref": null
