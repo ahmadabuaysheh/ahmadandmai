@@ -1,0 +1,129 @@
+{
+  "common": {
+    "coupleNames": "Martin & [Partner]",
+    "initials": "M & [P]",
+    "languageToggle": "عربي",
+    "loading": "Unfolding...",
+    "continue": "Continue",
+    "back": "Back",
+    "send": "Send",
+    "close": "Close",
+    "comingSoon": "Coming soon"
+  },
+  "envelope": {
+    "addressedTo": "Addressed to...",
+    "codePlaceholder": "Enter your invitation code",
+    "codeInvalid": "Hmm, we don't recognize that code. Check your invitation and try again.",
+    "openPrompt": "Tap the seal to open",
+    "publicTeaser": "Something beautiful is being written. If you hold an invitation, break the seal."
+  },
+  "hero": {
+    "greeting": "Dearest friend,",
+    "line1": "Some letters carry news. This one carries our whole hearts.",
+    "line2": "We are getting married, and we cannot imagine the day without you.",
+    "dateRevealed": "Save the date: {date}",
+    "dateHidden": "The date is a secret the letter will reveal soon.",
+    "countdownLabel": "Until we say 'I do'"
+  },
+  "story": {
+    "title": "Our Story",
+    "intro": "Every love letter needs a beginning. Ours started like this...",
+    "chapters": [
+      {
+        "title": "The First Hello",
+        "body": "[EDIT ME] It began with an ordinary day that refused to stay ordinary. A chance meeting, a first conversation that ran long past its welcome, and two people who didn't quite want to say goodbye."
+      },
+      {
+        "title": "The Falling",
+        "body": "[EDIT ME] Somewhere between late-night phone calls and shared plates of food, 'you' and 'me' quietly became 'us'. We stopped counting dates and started counting on each other."
+      },
+      {
+        "title": "The Question",
+        "body": "[EDIT ME] Then came the question — four small words, one shaking voice, and a yes that was never in doubt."
+      },
+      {
+        "title": "The Next Chapter",
+        "body": "And now we're writing the best part — and we want you in it."
+      }
+    ]
+  },
+  "details": {
+    "title": "The Details",
+    "venueLabel": "Where",
+    "whenLabel": "When",
+    "venueHidden": "Somewhere beautiful — we'll whisper the address soon.",
+    "schedule": [
+      { "time": "[TIME]", "event": "Guests arrive" },
+      { "time": "[TIME]", "event": "The ceremony" },
+      { "time": "[TIME]", "event": "Dinner is served" },
+      { "time": "[TIME]", "event": "Dancing until the ink runs dry" }
+    ],
+    "mapTitle": "Finding your way",
+    "hotelsTitle": "Where to stay",
+    "hotelsIntro": "A few places we love, close to the celebration:",
+    "spotsTitle": "Our favorite spots nearby",
+    "spotsIntro": "If you're making a weekend of it, don't miss these:"
+  },
+  "rsvp": {
+    "title": "Write Back to Us",
+    "intro": "Every letter deserves a reply. This one especially.",
+    "qAttending": "Will you be there when we say 'I do'?",
+    "aYes": "Wouldn't miss it for the world",
+    "aNo": "Sadly, I can't make it",
+    "qParty": "How many of you will be joining us?",
+    "qMeal": "What shall we feed you?",
+    "mealOptions": ["[Meal option 1]", "[Meal option 2]", "[Vegetarian option]"],
+    "qSong": "What song will get you on the dance floor?",
+    "songPlaceholder": "Name that tune...",
+    "qMessage": "Any words for the two of us?",
+    "messagePlaceholder": "Write us a little letter of your own...",
+    "thanksYes": "Your reply is sealed and on its way to our hearts. See you there!",
+    "thanksNo": "We'll miss you dearly — but you'll be with us in spirit. Thank you for writing back."
+  },
+  "guestbook": {
+    "title": "Notes Pinned to Our Letter",
+    "intro": "Leave a note, a wish, or a word of advice for the road ahead.",
+    "placeholder": "Dear Martin & [Partner]...",
+    "submit": "Pin your note",
+    "thanks": "Your note is pinned. Thank you!"
+  },
+  "gallery": {
+    "title": "The Photographs",
+    "coupleIntro": "A few moments we've tucked between the pages.",
+    "guestsIntro": "Now it's your turn — add the moments you captured.",
+    "upload": "Add your photos",
+    "uploadThanks": "Received! Your photos will appear once we've had a peek."
+  },
+  "quiz": {
+    "title": "How Well Do You Know Us?",
+    "intro": "Eight questions. No pressure. Eternal glory on the leaderboard.",
+    "start": "I know them best",
+    "leaderboard": "The Inner Circle",
+    "yourScore": "You scored {score} of {total}",
+    "questions": [
+      { "q": "[EDIT ME] Where did we first meet?", "options": ["[A]", "[B]", "[C]"], "answer": 0 },
+      { "q": "[EDIT ME] Who said 'I love you' first?", "options": ["Martin", "[Partner]", "Both at once"], "answer": 0 },
+      { "q": "[EDIT ME] What's our go-to late-night food?", "options": ["[A]", "[B]", "[C]"], "answer": 0 },
+      { "q": "[EDIT ME] Where was the proposal?", "options": ["[A]", "[B]", "[C]"], "answer": 0 },
+      { "q": "[EDIT ME] Who's the better cook?", "options": ["Martin", "[Partner]", "Neither, bless them"], "answer": 0 },
+      { "q": "[EDIT ME] What's our song?", "options": ["[A]", "[B]", "[C]"], "answer": 0 }
+    ]
+  },
+  "faq": {
+    "title": "P.S. — The Practical Bits",
+    "items": [
+      { "q": "What should I wear?", "a": "[EDIT ME] Formal attire. Think elegant — you'll want to look good in the photos, because there will be many." },
+      { "q": "Can I bring the little ones?", "a": "[EDIT ME] We love your kids, and this note will tell you whether it's a grown-ups' evening or a family affair." },
+      { "q": "Where do I park?", "a": "[EDIT ME] Parking details will appear here once the venue is revealed." },
+      { "q": "Can I take photos during the ceremony?", "a": "[EDIT ME] We'd love your eyes, not your screens, during the ceremony — our photographer has it covered. Afterward, snap away." },
+      { "q": "What about gifts?", "a": "Your presence is the truest gift. If you insist, our registry is just below." }
+    ],
+    "registryTitle": "The Registry",
+    "registryIntro": "[EDIT ME] Truly — you being there is everything. For those who insist:"
+  },
+  "signature": {
+    "closing": "With all the love ink can hold,",
+    "names": "Martin & [Partner]",
+    "postscript": "P.S. You found the end of the letter. But did you find everything hidden inside it?"
+  }
+}
