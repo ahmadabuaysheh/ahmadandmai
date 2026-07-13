@@ -1,7 +1,7 @@
 {
   "common": {
-    "coupleNames": "Martin & [Partner]",
-    "initials": "M & [P]",
+    "coupleNames": "Ahmad & Mai",
+    "initials": "A & M",
     "languageToggle": "عربي",
     "loading": "Unfolding...",
     "nav": "Contents of the letter",
@@ -84,7 +84,7 @@
   "guestbook": {
     "title": "Notes Pinned to Our Letter",
     "intro": "Leave a note, a wish, or a word of advice for the road ahead.",
-    "placeholder": "Dear Martin & [Partner]...",
+    "placeholder": "Dear Ahmad & Mai...",
     "submit": "Pin your note",
     "thanks": "Your note is pinned. Thank you!"
   },
@@ -103,10 +103,10 @@
     "yourScore": "You scored {score} of {total}",
     "questions": [
       { "q": "[EDIT ME] Where did we first meet?", "options": ["[A]", "[B]", "[C]"], "answer": 0 },
-      { "q": "[EDIT ME] Who said 'I love you' first?", "options": ["Martin", "[Partner]", "Both at once"], "answer": 0 },
+      { "q": "[EDIT ME] Who said 'I love you' first?", "options": ["Ahmad", "Mai", "Both at once"], "answer": 0 },
       { "q": "[EDIT ME] What's our go-to late-night food?", "options": ["[A]", "[B]", "[C]"], "answer": 0 },
       { "q": "[EDIT ME] Where was the proposal?", "options": ["[A]", "[B]", "[C]"], "answer": 0 },
-      { "q": "[EDIT ME] Who's the better cook?", "options": ["Martin", "[Partner]", "Neither, bless them"], "answer": 0 },
+      { "q": "[EDIT ME] Who's the better cook?", "options": ["Ahmad", "Mai", "Neither, bless them"], "answer": 0 },
       { "q": "[EDIT ME] What's our song?", "options": ["[A]", "[B]", "[C]"], "answer": 0 }
     ]
   },
@@ -124,7 +124,7 @@
   },
   "signature": {
     "closing": "With all the love ink can hold,",
-    "names": "Martin & [Partner]",
+    "names": "Ahmad & Mai",
     "postscript": "P.S. You found the end of the letter. But did you find everything hidden inside it?"
   }
 }
