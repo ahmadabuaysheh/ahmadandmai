@@ -1,11 +1,33 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState, useSyncExternalStore } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import WaxSeal from './WaxSeal';
 import InviteCodeForm from './InviteCodeForm';
 import type { Tier } from '@/lib/data/types';
+
+// The "seal broken" flag lives in sessionStorage so the envelope doesn't
+// replay on every soft navigation, exposed as a tiny external store so the
+// component can read it hydration-safely.
+const SEAL_KEY = 'seal-broken';
+let listeners: (() => void)[] = [];
+
+function subscribe(listener: () => void) {
+  listeners.push(listener);
+  return () => {
+    listeners = listeners.filter((l) => l !== listener);
+  };
+}
+
+function isSealBroken() {
+  return sessionStorage.getItem(SEAL_KEY) === '1';
+}
+
+function markSealBroken() {
+  sessionStorage.setItem(SEAL_KEY, '1');
+  listeners.forEach((l) => l());
+}
 
 export default function EnvelopeGate({
   tier,
@@ -19,19 +41,13 @@ export default function EnvelopeGate({
   const reduced = useReducedMotion();
   const isGuest = tier !== 'public';
   const [broken, setBroken] = useState(false);
-  const [opened, setOpened] = useState<boolean | null>(null);
-
-  useEffect(() => {
-    setOpened(sessionStorage.getItem('seal-broken') === '1');
-  }, []);
+  const opened = useSyncExternalStore(subscribe, isSealBroken, () => false);
 
   const open = () => {
     setBroken(true);
-    sessionStorage.setItem('seal-broken', '1');
-    setTimeout(() => setOpened(true), reduced ? 0 : 700);
+    setTimeout(markSealBroken, reduced ? 0 : 700);
   };
 
-  if (opened === null) return null; // avoid flash before sessionStorage read
   if (opened && isGuest) return <>{children}</>;
 
   return (

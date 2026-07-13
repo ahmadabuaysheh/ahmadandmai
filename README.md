@@ -1,36 +1,34 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# A Love Letter — Wedding Website
 
-## Getting Started
+A bilingual (English/Arabic) wedding website styled as a handwritten love letter: guests break a wax seal, enter their invite code, and read the letter. Built with Next.js (App Router), next-intl, framer-motion, and a Supabase-ready data layer.
 
-First, run the development server:
+## Dev setup
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev        # http://localhost:3000 → redirects to /en (or /ar)
+npm test           # vitest unit tests
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Seed invite codes (local backend)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Code     | Tier           | Sees                                   |
+| -------- | -------------- | -------------------------------------- |
+| `ROSE42` | `full`         | date, countdown, venue, schedule       |
+| `MOON17` | `save_the_date`| letter + teasers, no date/venue        |
+| (none)   | `public`       | envelope + teaser + code entry only    |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Tier-gated content is filtered **server-side** — it never reaches the HTML of lower tiers.
 
-## Learn More
+## Switching to Supabase
 
-To learn more about Next.js, take a look at the following resources:
+1. Create a Supabase project and run `supabase/migrations/0001_init.sql` in the SQL editor.
+2. Copy `.env.local.example` to `.env.local` and fill `NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, and a strong `INVITE_SECRET`.
+3. Restart the dev server — `src/lib/data/index.ts` picks the Supabase backend automatically when the URL is set. Page code doesn't change.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project docs
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Product brief: `PLAN.md`
+- Design spec: `docs/superpowers/specs/2026-07-13-wedding-site-design.md`
+- Implementation plan (milestones 1–3): `docs/superpowers/plans/2026-07-13-love-letter-m1-m3.md`
+- Copy lives in `src/messages/{en,ar}.json` (drafts preserved in `copy/`); strings in `[brackets]` are placeholders the couple will edit.
