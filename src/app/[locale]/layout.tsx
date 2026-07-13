@@ -6,6 +6,7 @@ import {
   Cormorant_Garamond,
   Amiri,
   IBM_Plex_Sans_Arabic,
+  Great_Vibes,
 } from 'next/font/google';
 import { routing } from '@/i18n/routing';
 import LanguageToggle from '@/components/LanguageToggle';
@@ -26,6 +27,11 @@ const plexArabic = IBM_Plex_Sans_Arabic({
   subsets: ['arabic'],
   weight: ['400', '500'],
   variable: '--font-arabic-body',
+});
+const greatVibes = Great_Vibes({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-script',
 });
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -55,7 +61,7 @@ export default async function LocaleLayout({
     <html
       lang={locale}
       dir={locale === 'ar' ? 'rtl' : 'ltr'}
-      className={`${cormorant.variable} ${amiri.variable} ${plexArabic.variable}`}
+      className={`${cormorant.variable} ${amiri.variable} ${plexArabic.variable} ${greatVibes.variable}`}
     >
       <body data-locale={locale}>
         <NextIntlClientProvider>

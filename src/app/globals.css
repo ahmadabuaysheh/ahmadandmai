@@ -39,3 +39,54 @@ html[lang='ar'] h2,
 html[lang='ar'] h3 {
   font-family: var(--font-arabic-display), serif;
 }
+
+/* Script accent for "handwritten" moments (Latin only; AR falls back to Amiri) */
+.script {
+  font-family: var(--font-script), var(--font-serif), cursive;
+}
+
+html[lang='ar'] .script {
+  font-family: var(--font-arabic-display), serif;
+}
+
+/* Paper grain via layered gradients (no image assets needed) */
+.paper-grain {
+  background-color: var(--paper);
+  background-image:
+    radial-gradient(rgba(120, 100, 70, 0.05) 1px, transparent 1px),
+    radial-gradient(rgba(120, 100, 70, 0.04) 1px, transparent 1px);
+  background-size: 7px 7px, 11px 11px;
+  background-position: 0 0, 3px 5px;
+}
+
+/* Deckled (torn) edge via a jagged mask on block-start/end */
+.deckled {
+  --notch: 8px;
+  clip-path: polygon(
+    0% var(--notch), 3% 0%, 8% var(--notch), 14% 2px, 20% var(--notch),
+    27% 1px, 33% var(--notch), 40% 3px, 47% var(--notch), 54% 0%,
+    61% var(--notch), 68% 2px, 75% var(--notch), 82% 1px, 89% var(--notch),
+    95% 0%, 100% var(--notch),
+    100% calc(100% - var(--notch)), 95% 100%, 89% calc(100% - var(--notch)),
+    82% calc(100% - 2px), 75% calc(100% - var(--notch)), 68% calc(100% - 1px),
+    61% calc(100% - var(--notch)), 54% 100%, 47% calc(100% - var(--notch)),
+    40% calc(100% - 3px), 33% calc(100% - var(--notch)), 27% calc(100% - 1px),
+    20% calc(100% - var(--notch)), 14% calc(100% - 2px),
+    8% calc(100% - var(--notch)), 3% 100%, 0% calc(100% - var(--notch))
+  );
+}
+
+/* Letter pages sit on the desk at slightly different angles */
+.page-tilt:nth-of-type(odd) {
+  rotate: -0.4deg;
+}
+
+.page-tilt:nth-of-type(even) {
+  rotate: 0.35deg;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
