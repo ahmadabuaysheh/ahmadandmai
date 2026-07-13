@@ -1,14 +1,15 @@
 'use client';
 
 import { motion, useReducedMotion } from 'framer-motion';
+import Monogram from '@/components/Monogram';
 
 export default function WaxSeal({
-  initials,
+  letters,
   broken,
   onBreak,
   label,
 }: {
-  initials: string;
+  letters: [string, string];
   broken: boolean;
   onBreak: () => void;
   label: string;
@@ -34,7 +35,7 @@ export default function WaxSeal({
       transition={{ duration: 0.7, ease: 'easeInOut' }}
       whileTap={reduced ? undefined : { scale: 0.92 }}
     >
-      <span className="text-2xl tracking-wide">{initials}</span>
+      <Monogram letters={letters} className="size-18" />
     </motion.button>
   );
 }

@@ -38,6 +38,7 @@ export default function EnvelopeGate({
 }) {
   const t = useTranslations('envelope');
   const tc = useTranslations('common');
+  const monogram = tc.raw('monogram') as [string, string];
   const reduced = useReducedMotion();
   const isGuest = tier !== 'public';
   const [broken, setBroken] = useState(false);
@@ -62,7 +63,7 @@ export default function EnvelopeGate({
             <>
               <p className="text-sm text-ink-faded">{t('openPrompt')}</p>
               <WaxSeal
-                initials={tc('initials')}
+                letters={monogram}
                 broken={broken}
                 onBreak={open}
                 label={t('openPrompt')}
@@ -72,7 +73,7 @@ export default function EnvelopeGate({
             <>
               <p className="italic text-ink-faded">{t('publicTeaser')}</p>
               <WaxSeal
-                initials={tc('initials')}
+                letters={monogram}
                 broken={false}
                 onBreak={() => {}}
                 label={tc('initials')}

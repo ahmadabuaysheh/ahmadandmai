@@ -2,6 +2,7 @@
   "common": {
     "coupleNames": "أحمد ومي",
     "initials": "أ و م",
+    "monogram": ["أ", "م"],
     "languageToggle": "English",
     "loading": "الرسالة تُفتح...",
     "nav": "محتويات الرسالة",

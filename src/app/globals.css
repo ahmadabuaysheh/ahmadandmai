@@ -40,6 +40,17 @@ html[lang='ar'] h3 {
   font-family: var(--font-arabic-display), serif;
 }
 
+/* Monogram letters: elegant italic serif for Latin, Amiri upright for Arabic */
+.monogram text {
+  font-family: var(--font-serif), serif;
+  font-style: italic;
+}
+
+html[lang='ar'] .monogram text {
+  font-family: var(--font-arabic-display), serif;
+  font-style: normal;
+}
+
 /* Script accent for "handwritten" moments (Latin only; AR falls back to Amiri) */
 .script {
   font-family: var(--font-script), var(--font-serif), cursive;

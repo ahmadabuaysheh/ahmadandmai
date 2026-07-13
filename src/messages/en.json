@@ -2,6 +2,7 @@
   "common": {
     "coupleNames": "Ahmad & Mai",
     "initials": "A & M",
+    "monogram": ["A", "M"],
     "languageToggle": "عربي",
     "loading": "Unfolding...",
     "nav": "Contents of the letter",

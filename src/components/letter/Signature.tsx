@@ -1,8 +1,10 @@
 import { useTranslations } from 'next-intl';
+import Monogram from '@/components/Monogram';
 
 export default function Signature() {
   const t = useTranslations('signature');
   const tc = useTranslations('common');
+  const monogram = tc.raw('monogram') as [string, string];
   return (
     <footer className="mx-auto max-w-xl px-6 py-16 text-center">
       <p className="italic">{t('closing')}</p>
@@ -17,7 +19,7 @@ export default function Signature() {
             'radial-gradient(circle at 35% 30%, #b04a58, var(--wax) 60%, #6e222d)',
         }}
       >
-        <span className="text-lg">{tc('initials')}</span>
+        <Monogram letters={monogram} className="size-12" />
       </div>
       <p className="mt-8 text-sm text-ink-faded">{t('postscript')}</p>
     </footer>
