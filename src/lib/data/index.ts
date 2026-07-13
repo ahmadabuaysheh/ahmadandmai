@@ -15,8 +15,12 @@ export function getDataStore(): DataStore {
 
 export type {
   DataStore,
+  GuestbookNote,
   Invite,
+  NewGuestbookNote,
+  NewQuizScore,
   NewRsvp,
+  QuizScore,
   RsvpRow,
   Settings,
   Tier,

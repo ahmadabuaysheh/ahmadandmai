@@ -31,9 +31,37 @@ export interface NewRsvp {
 
 export type RsvpRow = NewRsvp & { createdAt: string };
 
+export interface GuestbookNote {
+  name: string;
+  note: string;
+  createdAt: string;
+}
+
+export interface NewGuestbookNote {
+  inviteCode: string;
+  name: string;
+  note: string;
+}
+
+export interface QuizScore {
+  name: string;
+  score: number;
+  createdAt: string;
+}
+
+export interface NewQuizScore {
+  inviteCode: string;
+  name: string;
+  score: number;
+}
+
 export interface DataStore {
   getInvite(code: string): Promise<Invite | null>;
   getSettings(): Promise<Settings>;
   getRsvps(inviteCode: string): Promise<RsvpRow[]>;
   replaceRsvps(inviteCode: string, rows: NewRsvp[]): Promise<void>;
+  getGuestbookNotes(): Promise<GuestbookNote[]>;
+  addGuestbookNote(entry: NewGuestbookNote): Promise<void>;
+  getQuizScores(): Promise<QuizScore[]>;
+  addQuizScore(entry: NewQuizScore): Promise<void>;
 }

@@ -93,4 +93,34 @@ describe('local data store', () => {
     expect(await store.getRsvps('ROSE42')).toHaveLength(1);
     expect(await store.getRsvps('MOON17')).toHaveLength(1);
   });
+
+  it('guestbook notes round-trip newest first', async () => {
+    await store.addGuestbookNote({
+      inviteCode: 'ROSE42',
+      name: 'Suzan',
+      note: 'First!',
+    });
+    await store.addGuestbookNote({
+      inviteCode: 'MOON17',
+      name: 'Sara',
+      note: 'Second!',
+    });
+    const notes = await store.getGuestbookNotes();
+    expect(notes).toHaveLength(2);
+    expect(notes[0].note).toBe('Second!');
+    expect(notes[0].name).toBe('Sara');
+    expect(notes[0].createdAt).toBeTruthy();
+    // inviteCode must not be exposed
+    expect(
+      (notes[0] as unknown as Record<string, unknown>).inviteCode,
+    ).toBeUndefined();
+  });
+
+  it('quiz scores round-trip', async () => {
+    await store.addQuizScore({ inviteCode: 'ROSE42', name: 'Omar', score: 5 });
+    const scores = await store.getQuizScores();
+    expect(scores).toEqual([
+      { name: 'Omar', score: 5, createdAt: expect.any(String) },
+    ]);
+  });
 });

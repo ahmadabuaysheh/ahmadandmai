@@ -1,5 +1,15 @@
 import { createClient } from '@supabase/supabase-js';
-import type { DataStore, Invite, NewRsvp, RsvpRow, Settings } from './types';
+import type {
+  DataStore,
+  GuestbookNote,
+  Invite,
+  NewGuestbookNote,
+  NewQuizScore,
+  NewRsvp,
+  QuizScore,
+  RsvpRow,
+  Settings,
+} from './types';
 
 export function createSupabaseStore(): DataStore {
   const client = createClient(
@@ -79,6 +89,51 @@ export function createSupabaseStore(): DataStore {
       if (ins.error) {
         throw new Error(`replaceRsvps insert failed: ${ins.error.message}`);
       }
+    },
+
+    async getGuestbookNotes(): Promise<GuestbookNote[]> {
+      const { data, error } = await client
+        .from('guestbook')
+        .select('name, note, created_at')
+        .eq('approved', true)
+        .order('created_at', { ascending: false })
+        .limit(100);
+      if (error || !data) return [];
+      return data.map((n) => ({
+        name: n.name,
+        note: n.note,
+        createdAt: n.created_at,
+      }));
+    },
+
+    async addGuestbookNote(entry: NewGuestbookNote): Promise<void> {
+      const { error } = await client.from('guestbook').insert({
+        invite_code: entry.inviteCode,
+        name: entry.name,
+        note: entry.note,
+      });
+      if (error) throw new Error(`addGuestbookNote failed: ${error.message}`);
+    },
+
+    async getQuizScores(): Promise<QuizScore[]> {
+      const { data, error } = await client
+        .from('quiz_scores')
+        .select('name, score, created_at');
+      if (error || !data) return [];
+      return data.map((s) => ({
+        name: s.name,
+        score: s.score,
+        createdAt: s.created_at,
+      }));
+    },
+
+    async addQuizScore(entry: NewQuizScore): Promise<void> {
+      const { error } = await client.from('quiz_scores').insert({
+        invite_code: entry.inviteCode,
+        name: entry.name,
+        score: entry.score,
+      });
+      if (error) throw new Error(`addQuizScore failed: ${error.message}`);
     },
   };
 }
