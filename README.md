@@ -29,6 +29,13 @@ Guests reply through a conversational flow in the letter: attending → party si
 - **Guestbook:** approved notes render as a pinned board (newest first, capped at 100); guests sign with a name from their invite. Notes appear immediately (`approved` default true) — the future admin panel can hide any.
 - **Quiz:** questions live in `src/messages/{en,ar}.json` under `quiz.questions` (`answer` is the index of the correct option). Leaderboard shows the top 10 — best score per guest name, earliest attempt wins ties. Retakes allowed.
 
+## Gallery
+
+- Photos live in the **private** `photos` storage bucket, indexed by the `photos` table, and render through 1-hour signed URLs — only invite-holders ever see them.
+- **Add couple photos:** Supabase dashboard → Storage → `photos` → upload the file (any folder path works, e.g. `couple/01.jpg`), then Table Editor → `photos` → insert a row with that `storage_path` and `approved = true`.
+- **After the wedding:** set `galleryMode` to `"guests"` inside the `settings` table's `wedding` JSON — the section flips to the upload wall. Guest uploads land `approved = false`; approve them in the Table Editor.
+- **QR upload page:** `/en/upload?t=<uploadToken>` (token in the `settings` JSON, set directly in the DB — not in git). Works without an invite code; meant for the printed QR on tables.
+
 ## Data backend
 
 `src/lib/data/index.ts` picks the backend automatically: **Supabase** when `NEXT_PUBLIC_SUPABASE_URL` is set in `.env.local`, otherwise a **local JSON** store (seed data in `src/lib/data/seed.json`, writes to gitignored `.local-db.json`).
