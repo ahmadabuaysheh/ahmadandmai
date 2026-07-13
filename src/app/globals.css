@@ -38,6 +38,8 @@ html[lang='ar'] h1,
 html[lang='ar'] h2,
 html[lang='ar'] h3 {
   font-family: var(--font-arabic-display), serif;
+  /* Amiri's ascenders/diacritics clip at Latin-tuned line heights */
+  line-height: 1.7;
 }
 
 /* Monogram letters: elegant italic serif for Latin, Amiri upright for Arabic */
