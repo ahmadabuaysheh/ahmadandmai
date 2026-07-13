@@ -1,0 +1,27 @@
+{
+  "invites": [
+    {
+      "code": "ROSE42",
+      "guestNames": ["Layla", "Omar"],
+      "tier": "full",
+      "maxPartySize": 2,
+      "languagePref": null
+    },
+    {
+      "code": "MOON17",
+      "guestNames": ["Sara"],
+      "tier": "save_the_date",
+      "maxPartySize": 1,
+      "languagePref": "ar"
+    }
+  ],
+  "settings": {
+    "weddingDateIso": "2027-05-21T16:00:00+03:00",
+    "venue": {
+      "name": "The Rose Garden Hall",
+      "address": "123 Garden Lane",
+      "mapUrl": "https://maps.google.com/?q=rose+garden+hall"
+    },
+    "galleryMode": "couple"
+  }
+}
