@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
-import type { DataStore, Invite, NewRsvp, Settings } from './types';
+import type { DataStore, Invite, NewRsvp, RsvpRow, Settings } from './types';
 
 export function createSupabaseStore(): DataStore {
   const client = createClient(
@@ -38,16 +38,47 @@ export function createSupabaseStore(): DataStore {
       return data.value as Settings;
     },
 
-    async saveRsvp(rsvp: NewRsvp): Promise<void> {
-      const { error } = await client.from('rsvps').insert({
-        invite_code: rsvp.inviteCode,
-        guest_name: rsvp.guestName,
-        attending: rsvp.attending,
-        meal: rsvp.meal,
-        song_request: rsvp.songRequest,
-        message: rsvp.message,
-      });
-      if (error) throw new Error(`saveRsvp failed: ${error.message}`);
+    async getRsvps(inviteCode: string): Promise<RsvpRow[]> {
+      const { data, error } = await client
+        .from('rsvps')
+        .select(
+          'invite_code, guest_name, attending, meal, song_request, message, created_at',
+        )
+        .eq('invite_code', inviteCode);
+      if (error || !data) return [];
+      return data.map((r) => ({
+        inviteCode: r.invite_code,
+        guestName: r.guest_name,
+        attending: r.attending,
+        meal: r.meal,
+        songRequest: r.song_request,
+        message: r.message,
+        createdAt: r.created_at,
+      }));
+    },
+
+    async replaceRsvps(inviteCode: string, rows: NewRsvp[]): Promise<void> {
+      const del = await client
+        .from('rsvps')
+        .delete()
+        .eq('invite_code', inviteCode);
+      if (del.error) {
+        throw new Error(`replaceRsvps delete failed: ${del.error.message}`);
+      }
+      if (rows.length === 0) return;
+      const ins = await client.from('rsvps').insert(
+        rows.map((r) => ({
+          invite_code: r.inviteCode,
+          guest_name: r.guestName,
+          attending: r.attending,
+          meal: r.meal,
+          song_request: r.songRequest,
+          message: r.message,
+        })),
+      );
+      if (ins.error) {
+        throw new Error(`replaceRsvps insert failed: ${ins.error.message}`);
+      }
     },
   };
 }

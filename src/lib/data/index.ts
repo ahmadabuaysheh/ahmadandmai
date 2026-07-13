@@ -17,6 +17,7 @@ export type {
   DataStore,
   Invite,
   NewRsvp,
+  RsvpRow,
   Settings,
   Tier,
   Venue,

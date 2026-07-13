@@ -1,17 +1,15 @@
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import path from 'node:path';
 import seed from './seed.json';
-import type { DataStore, Invite, NewRsvp, Settings } from './types';
+import type { DataStore, Invite, NewRsvp, RsvpRow, Settings } from './types';
 
 interface LocalDb {
-  rsvps: (NewRsvp & { createdAt: string })[];
+  rsvps: RsvpRow[];
 }
 
 const EMPTY_DB: LocalDb = { rsvps: [] };
 
-export function createLocalStore(opts?: { dbPath?: string }): DataStore & {
-  __readAll(): Promise<LocalDb>;
-} {
+export function createLocalStore(opts?: { dbPath?: string }): DataStore {
   const dbPath = opts?.dbPath ?? path.join(process.cwd(), '.local-db.json');
 
   const readDb = (): LocalDb =>
@@ -31,14 +29,17 @@ export function createLocalStore(opts?: { dbPath?: string }): DataStore & {
       return seed.settings as Settings;
     },
 
-    async saveRsvp(rsvp: NewRsvp): Promise<void> {
-      const db = readDb();
-      db.rsvps.push({ ...rsvp, createdAt: new Date().toISOString() });
-      writeFileSync(dbPath, JSON.stringify(db, null, 2));
+    async getRsvps(inviteCode: string): Promise<RsvpRow[]> {
+      return readDb().rsvps.filter((r) => r.inviteCode === inviteCode);
     },
 
-    async __readAll(): Promise<LocalDb> {
-      return readDb();
+    async replaceRsvps(inviteCode: string, rows: NewRsvp[]): Promise<void> {
+      const db = readDb();
+      const createdAt = new Date().toISOString();
+      db.rsvps = db.rsvps
+        .filter((r) => r.inviteCode !== inviteCode)
+        .concat(rows.map((r) => ({ ...r, createdAt })));
+      writeFileSync(dbPath, JSON.stringify(db, null, 2));
     },
   };
 }

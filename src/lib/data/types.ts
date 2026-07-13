@@ -29,8 +29,11 @@ export interface NewRsvp {
   message: string | null;
 }
 
+export type RsvpRow = NewRsvp & { createdAt: string };
+
 export interface DataStore {
   getInvite(code: string): Promise<Invite | null>;
   getSettings(): Promise<Settings>;
-  saveRsvp(rsvp: NewRsvp): Promise<void>;
+  getRsvps(inviteCode: string): Promise<RsvpRow[]>;
+  replaceRsvps(inviteCode: string, rows: NewRsvp[]): Promise<void>;
 }
