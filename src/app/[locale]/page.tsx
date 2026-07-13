@@ -4,12 +4,14 @@ import { getDataStore } from '@/lib/data';
 import { gateForTier } from '@/lib/gating';
 import EnvelopeGate from '@/components/envelope/EnvelopeGate';
 import Details from '@/components/letter/Details';
+import Guestbook from '@/components/letter/Guestbook';
 import Hero from '@/components/letter/Hero';
 import LetterSection from '@/components/letter/LetterSection';
-import Story from '@/components/letter/Story';
+import Quiz from '@/components/letter/Quiz';
 import RibbonNav from '@/components/letter/RibbonNav';
 import Rsvp from '@/components/letter/Rsvp';
 import Signature from '@/components/letter/Signature';
+import Story from '@/components/letter/Story';
 
 export default async function LetterPage({
   params,
@@ -40,7 +42,6 @@ export default async function LetterPage({
     { id: 'quiz', label: t('quiz.title') },
     { id: 'faq', label: t('faq.title') },
   ];
-  const stubs = sections.slice(3);
 
   return (
     <EnvelopeGate tier={guest.tier}>
@@ -50,11 +51,14 @@ export default async function LetterPage({
         <Story />
         <Details gated={gated} />
         <Rsvp guest={guest} />
-        {stubs.map((s) => (
-          <LetterSection key={s.id} id={s.id} title={s.label}>
-            <p className="italic text-ink-faded">{t('common.comingSoon')}</p>
-          </LetterSection>
-        ))}
+        <Guestbook guest={guest} />
+        <LetterSection id="gallery" title={t('gallery.title')}>
+          <p className="italic text-ink-faded">{t('common.comingSoon')}</p>
+        </LetterSection>
+        <Quiz guest={guest} />
+        <LetterSection id="faq" title={t('faq.title')}>
+          <p className="italic text-ink-faded">{t('common.comingSoon')}</p>
+        </LetterSection>
         <Signature />
       </main>
     </EnvelopeGate>

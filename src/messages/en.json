@@ -113,7 +113,10 @@
     "intro": "Leave a note, a wish, or a word of advice for the road ahead.",
     "placeholder": "Dear Ahmad & Mai...",
     "submit": "Pin your note",
-    "thanks": "Your note is pinned. Thank you!"
+    "thanks": "Your note is pinned. Thank you!",
+    "signAs": "Signing as",
+    "empty": "The board is waiting for its very first note.",
+    "errorGeneric": "The pin slipped — please try again."
   },
   "gallery": {
     "title": "The Photographs",
@@ -183,7 +186,13 @@
         ],
         "answer": 0
       }
-    ]
+    ],
+    "next": "Next",
+    "progress": "{n} of {total}",
+    "saveScore": "Save my score",
+    "retake": "Try again",
+    "errorGeneric": "The ink smudged — please try again.",
+    "emptyLeaderboard": "No champions yet — be the first."
   },
   "faq": {
     "title": "P.S. — The Practical Bits",
