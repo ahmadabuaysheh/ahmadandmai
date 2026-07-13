@@ -1,6 +1,6 @@
 # A Love Letter — Wedding Website
 
-A bilingual (English/Arabic) wedding website styled as a handwritten love letter: guests break a wax seal, enter their invite code, and read the letter. Built with Next.js (App Router), next-intl, framer-motion, and a Supabase-ready data layer.
+A bilingual (English/Arabic) wedding website styled as a handwritten love letter: guests break a wax seal, enter their invite code, and read the letter. Built with Next.js (App Router), next-intl, framer-motion, and Supabase. Live at https://ahmadandmai.vercel.app.
 
 ## Dev setup
 
@@ -10,7 +10,7 @@ npm run dev        # http://localhost:3000 → redirects to /en (or /ar)
 npm test           # vitest unit tests
 ```
 
-## Seed invite codes (local backend)
+## Invite codes (seeded)
 
 | Code     | Tier           | Sees                                   |
 | -------- | -------------- | -------------------------------------- |
@@ -20,15 +20,21 @@ npm test           # vitest unit tests
 
 Tier-gated content is filtered **server-side** — it never reaches the HTML of lower tiers.
 
-## Switching to Supabase
+## RSVP
 
-1. Create a Supabase project and run `supabase/migrations/0001_init.sql` in the SQL editor.
-2. Copy `.env.local.example` to `.env.local` and fill `NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, and a strong `INVITE_SECRET`.
-3. Restart the dev server — `src/lib/data/index.ts` picks the Supabase backend automatically when the URL is set. Page code doesn't change.
+Guests reply through a conversational flow in the letter: attending → party size (capped by their invite) → per-guest meal → song request → message. Replies are stored one row per guest in the `rsvps` table; re-submitting **replaces** the previous reply. Submissions are validated server-side against the signed invite cookie.
+
+## Data backend
+
+`src/lib/data/index.ts` picks the backend automatically: **Supabase** when `NEXT_PUBLIC_SUPABASE_URL` is set in `.env.local`, otherwise a **local JSON** store (seed data in `src/lib/data/seed.json`, writes to gitignored `.local-db.json`).
+
+- Schema: `supabase/migrations/0001_init.sql`; seeds: `0002_seed.sql` (both idempotent to re-run).
+- Production (Vercel) has `NEXT_PUBLIC_SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY`, and `INVITE_SECRET` set in the project env. Dev and prod currently share the same Supabase project.
+- Deploys: push to `main` → Vercel auto-deploys.
 
 ## Project docs
 
 - Product brief: `PLAN.md`
-- Design spec: `docs/superpowers/specs/2026-07-13-wedding-site-design.md`
-- Implementation plan (milestones 1–3): `docs/superpowers/plans/2026-07-13-love-letter-m1-m3.md`
+- Design specs: `docs/superpowers/specs/`
+- Implementation plans: `docs/superpowers/plans/`
 - Copy lives in `src/messages/{en,ar}.json` (drafts preserved in `copy/`); strings in `[brackets]` are placeholders the couple will edit.
