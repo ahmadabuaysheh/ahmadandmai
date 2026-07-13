@@ -6,6 +6,7 @@ const settings: Settings = {
   weddingDateIso: '2027-05-21T16:00:00+03:00',
   venue: { name: 'Hall', address: 'Addr', mapUrl: 'https://maps.example' },
   galleryMode: 'couple',
+  uploadToken: null,
 };
 
 describe('gateForTier', () => {

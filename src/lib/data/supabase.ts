@@ -42,10 +42,13 @@ export function createSupabaseStore(): DataStore {
         .select('value')
         .eq('key', 'wedding')
         .single();
-      if (error || !data) {
-        return { weddingDateIso: null, venue: null, galleryMode: 'couple' };
-      }
-      return data.value as Settings;
+      const stored = (error || !data ? {} : data.value) as Partial<Settings>;
+      return {
+        weddingDateIso: stored.weddingDateIso ?? null,
+        venue: stored.venue ?? null,
+        galleryMode: stored.galleryMode ?? 'couple',
+        uploadToken: stored.uploadToken ?? null,
+      };
     },
 
     async getRsvps(inviteCode: string): Promise<RsvpRow[]> {

@@ -22,6 +22,7 @@
       "address": "123 Garden Lane",
       "mapUrl": "https://maps.google.com/?q=rose+garden+hall"
     },
-    "galleryMode": "couple"
+    "galleryMode": "couple",
+    "uploadToken": "dev-upload-token"
   }
 }

@@ -18,6 +18,7 @@ export interface Settings {
   weddingDateIso: string | null;
   venue: Venue | null;
   galleryMode: 'couple' | 'guests';
+  uploadToken: string | null;
 }
 
 export interface NewRsvp {
