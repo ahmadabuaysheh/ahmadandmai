@@ -142,15 +142,6 @@
         "answer": 0
       },
       {
-        "q": "[EDIT ME] Who said 'I love you' first?",
-        "options": [
-          "Ahmad",
-          "Mai",
-          "Both at once"
-        ],
-        "answer": 0
-      },
-      {
         "q": "[EDIT ME] What's our go-to late-night food?",
         "options": [
           "[A]",
