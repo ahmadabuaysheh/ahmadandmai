@@ -142,4 +142,78 @@ describe('local data store', () => {
     expect(photos[0].id).toBeTruthy();
     expect(photos[0].createdAt).toBeTruthy();
   });
+
+  it('admin: listAllRsvps returns every invite reply', async () => {
+    await store.replaceRsvps('ROSE42', [
+      {
+        inviteCode: 'ROSE42',
+        guestName: 'Suzan',
+        attending: true,
+        meal: null,
+        songRequest: null,
+        message: null,
+      },
+    ]);
+    await store.replaceRsvps('MOON17', [
+      {
+        inviteCode: 'MOON17',
+        guestName: 'Sara',
+        attending: false,
+        meal: null,
+        songRequest: null,
+        message: null,
+      },
+    ]);
+    expect(await store.listAllRsvps()).toHaveLength(2);
+  });
+
+  it('admin: guestbook approval toggles and hides from public reads', async () => {
+    await store.addGuestbookNote({
+      inviteCode: 'ROSE42',
+      name: 'Omar',
+      note: 'Hi',
+    });
+    const [note] = await store.listGuestbook();
+    expect(note.approved).toBe(true);
+    await store.setGuestbookApproval(note.id, false);
+    expect((await store.listGuestbook())[0].approved).toBe(false);
+    expect(await store.getGuestbookNotes()).toHaveLength(0);
+  });
+
+  it('admin: photo approval toggles', async () => {
+    await store.addPhoto({ uploaderName: 'Sara', storagePath: 'uploads/x.jpg' });
+    const [photo] = await store.listAllPhotos();
+    expect(photo.approved).toBe(false);
+    await store.setPhotoApproval(photo.id, true);
+    expect(await store.getPhotos()).toHaveLength(1);
+  });
+
+  it('admin: updateSettings overrides reads', async () => {
+    const settings = await store.getSettings();
+    await store.updateSettings({ ...settings, galleryMode: 'guests' });
+    expect((await store.getSettings()).galleryMode).toBe('guests');
+    expect((await store.getSettings()).uploadToken).toBe(settings.uploadToken);
+  });
+
+  it('admin: upsertInvite creates and updates codes over the seed', async () => {
+    expect(await store.listInvites()).toHaveLength(2); // seed
+    await store.upsertInvite({
+      code: 'NEW01',
+      guestNames: ['Test'],
+      tier: 'full',
+      maxPartySize: 1,
+      languagePref: null,
+    });
+    expect(await store.listInvites()).toHaveLength(3);
+    expect((await store.getInvite('NEW01'))?.guestNames).toEqual(['Test']);
+    await store.upsertInvite({
+      code: 'ROSE42',
+      guestNames: ['Suzan', 'Omar', 'Baby'],
+      tier: 'full',
+      maxPartySize: 3,
+      languagePref: null,
+    });
+    expect(await store.listInvites()).toHaveLength(3);
+    expect((await store.getInvite('ROSE42'))?.maxPartySize).toBe(3);
+  });
 });

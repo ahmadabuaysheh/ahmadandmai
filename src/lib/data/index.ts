@@ -14,6 +14,8 @@ export function getDataStore(): DataStore {
 }
 
 export type {
+  AdminGuestbookNote,
+  AdminPhoto,
   DataStore,
   GuestbookNote,
   Invite,

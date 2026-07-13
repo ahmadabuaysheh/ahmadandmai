@@ -68,6 +68,17 @@ export interface NewPhoto {
   storagePath: string;
 }
 
+export type AdminGuestbookNote = {
+  id: string;
+  inviteCode: string;
+  name: string;
+  note: string;
+  approved: boolean;
+  createdAt: string;
+};
+
+export type AdminPhoto = Photo & { approved: boolean };
+
 export interface DataStore {
   getInvite(code: string): Promise<Invite | null>;
   getSettings(): Promise<Settings>;
@@ -79,4 +90,12 @@ export interface DataStore {
   addQuizScore(entry: NewQuizScore): Promise<void>;
   getPhotos(): Promise<Photo[]>;
   addPhoto(entry: NewPhoto): Promise<void>;
+  listAllRsvps(): Promise<RsvpRow[]>;
+  listGuestbook(): Promise<AdminGuestbookNote[]>;
+  setGuestbookApproval(id: string, approved: boolean): Promise<void>;
+  listAllPhotos(): Promise<AdminPhoto[]>;
+  setPhotoApproval(id: string, approved: boolean): Promise<void>;
+  updateSettings(settings: Settings): Promise<void>;
+  listInvites(): Promise<Invite[]>;
+  upsertInvite(invite: Invite): Promise<void>;
 }
