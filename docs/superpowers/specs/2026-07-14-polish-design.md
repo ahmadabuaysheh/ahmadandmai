@@ -31,8 +31,7 @@ Scope: plan.md milestone 9. Deliberately skipped: 3D page-curl transitions (tilt
 
 ## 5. Idle re-seal
 
-- In `EnvelopeGate`: when the letter is open, an idle timer (pointer/key/scroll/touch reset) re-seals after 10 minutes — clears the seal-broken flag so the envelope overlay returns (guest tier keeps cookie; one tap reopens).
-- Only while tab is visible (`visibilitychange` pauses the timer) to avoid re-sealing backgrounded phones mid-visit... actually simpler and equally gentle: timer runs regardless; reopening is one tap. Decision: timer runs regardless.
+- In `EnvelopeGate`: when the letter is open, an idle timer (pointer/key/scroll/touch events reset it) re-seals after 10 minutes — clears the seal-broken flag so the envelope overlay returns. The invite cookie is untouched, so reopening is a single tap. The timer runs regardless of tab visibility; a backgrounded phone that re-seals costs the guest one tap, which is the intended "gentle" behavior.
 
 ## 6. Audits (verification work, may produce small fixes)
 
